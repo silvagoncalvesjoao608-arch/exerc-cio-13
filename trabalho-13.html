@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Consulta de Pessoas</title>
+
+    <style>
+      .miniatura {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        cursor: pointer;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.85);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      #fotoGrande {
+        max-width: 90vw;
+        max-height: 85vh;
+        object-fit: contain;
+      }
+
+      #fecharModal {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        font-size: 35px;
+        color: white;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+
+    <script src="trabalho-13.js" defer></script>
+  </head>
+
+  <body>
+    <h1>Consulta de Pessoas</h1>
+
+    <label for="nacionalidade">Escolha um país:</label>
+
+    <select id="nacionalidade" onchange="carregaDados()">
+      <option value="br">Brasil (BR)</option>
+      <option value="us">Estados Unidos (US)</option>
+      <option value="gb">Reino Unido (GB)</option>
+    </select>
+
+    <br /><br />
+
+    <label for="busca">Buscar pessoa:</label>
+
+    <input
+      type="text"
+      id="busca"
+      placeholder="Digite um nome, email ou país..."
+      oninput="filtrarPessoas()"
+    />
+
+    <br /><br />
+
+    <button type="button" onclick="ordenarPorNome()">Ordenar por nome</button>
+
+    <button type="button" onclick="ordenarPorIdade()">Ordenar por idade</button>
+
+    <br /><br />
+
+    <table id="pessoas" border="1" cellpadding="6">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Gênero</th>
+          <th>Idade</th>
+          <th>Data de nascimento</th>
+          <th>País</th>
+          <th>Estado</th>
+          <th>Celular</th>
+          <th>Telefone</th>
+        </tr>
+      </thead>
+
+      <tbody></tbody>
+    </table>
+
+    <div
+      id="modalFoto"
+      class="modal"
+      onclick="fecharFotoGrande(event)"
+      aria-hidden="true"
+    >
+      <button
+        type="button"
+        id="fecharModal"
+        onclick="fecharFotoGrande()"
+        aria-label="Fechar imagem"
+      >
+        &times;
+      </button>
+
+      <img id="fotoGrande" alt="Foto ampliada" />
+    </div>
+  </body>
+</html>
